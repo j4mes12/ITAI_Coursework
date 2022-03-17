@@ -1,32 +1,24 @@
 RANDOM_STATE = 73
 
+OUTPUTS_PATH = "./outputs/"
+
+DATA_PATH = "./data/"
+
 MODEL_RESPONSE = "rented_bike_count"
 
-MODEL_FEATURES_WB = [
+CORE_MODEL_FEATURES = [
+    "rented_bike_count",
     "hour",
     "temperature",
     "humidity",
     "wind_speed",
     "visibility",
-    "binary_solar_radiation",
-    "binary_rainfall",
-    "binary_snowfall",
     "holiday",
-    "seasons_Autumn",
-    "seasons_Spring",
-    "seasons_Summer",
-]
-
-MODEL_FEATURES = [
-    "hour",
-    "temperature",
-    "humidity",
-    "wind_speed",
-    "visibility",
     "solar_radiation",
     "rainfall",
     "snowfall",
-    "holiday",
+    "date_weekday",
+    "date_month",
     "seasons_Autumn",
     "seasons_Spring",
     "seasons_Summer",

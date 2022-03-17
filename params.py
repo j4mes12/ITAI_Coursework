@@ -4,6 +4,10 @@ OUTPUTS_PATH = "./outputs/"
 
 DATA_PATH = "./data/"
 
+TTV_DATA_PATH = "./data/ttv_data/"
+
+DATA_SAVE_NAME = "data_all"
+
 MODEL_RESPONSE = "rented_bike_count"
 
 CORE_MODEL_FEATURES = [

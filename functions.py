@@ -5,6 +5,27 @@ import joblib
 
 from sklearn.metrics import mean_squared_error
 
+# Feature Engineering
+
+def load_split_datasets(part: str):
+
+    train = joblib.load(p.TTV_DATA_PATH + f'{part}_{p.DATA_SAVE_NAME}_train.pkl')
+    test = joblib.load(p.TTV_DATA_PATH + f'{part}_{p.DATA_SAVE_NAME}_test.pkl')
+    val = joblib.load(p.TTV_DATA_PATH + f'{part}_{p.DATA_SAVE_NAME}_val.pkl')
+
+    return train, test, val
+
+def save_split_datasets(datasets, part: str):
+
+    train = datasets['train']
+    test = datasets['test']
+    val = datasets['val']
+
+    joblib.dump(train, p.TTV_DATA_PATH + f'{part}_{p.DATA_SAVE_NAME}_train.pkl')
+    joblib.dump(test, p.TTV_DATA_PATH + f'{part}_{p.DATA_SAVE_NAME}_test.pkl')
+    joblib.dump(val, p.TTV_DATA_PATH + f'{part}_{p.DATA_SAVE_NAME}_val.pkl')
+
+
 # Modelling
 
 

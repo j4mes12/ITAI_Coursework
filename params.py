@@ -6,7 +6,7 @@ DATA_PATH = "./data/"
 
 TTV_DATA_PATH = "./data/ttv_data/"
 
-DATA_SAVE_NAME = "data_all"
+DATA_SAVE_NAME = "data"
 
 MODEL_RESPONSE = "rented_bike_count"
 
@@ -17,7 +17,7 @@ CORE_MODEL_FEATURES = [
     "humidity",
     "wind_speed",
     "visibility",
-    "holiday",
+    "bin_holiday",
     "solar_radiation",
     "rainfall",
     "snowfall",

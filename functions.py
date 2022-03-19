@@ -19,7 +19,7 @@ def load_split_datasets(part: str):
     return train, test, val
 
 
-def save_split_datasets(datasets, part: str):
+def save_split_datasets(datasets: dict, part: str):
 
     train = datasets["train"]
     test = datasets["test"]
@@ -63,15 +63,15 @@ def save_model(model, model_name: str):
     joblib.dump(model, p.OUTPUTS_PATH + f"model_{model_name}.pkl")
 
 
-def save_preds(model, model_name: str, X_test):
+def save_preds(model, model_name: str, X: pd.DataFrame):
 
-    y_pred = pd.DataFrame(model.predict(X_test))
+    y_pred = pd.DataFrame(model.predict(X))
 
     y_pred.to_csv(p.OUTPUTS_PATH + f"preds_{model_name}.csv")
 
 
-def save_model_and_preds(model, model_name: str, X_test):
+def save_model_and_preds(model, model_name: str, X: pd.DataFrame):
 
     save_model(model, model_name)
 
-    save_preds(model, model_name, X_test)
+    save_preds(model, model_name, X)

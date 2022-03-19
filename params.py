@@ -11,7 +11,6 @@ DATA_SAVE_NAME = "data"
 MODEL_RESPONSE = "rented_bike_count"
 
 CORE_MODEL_FEATURES = [
-    "rented_bike_count",
     "hour",
     "temperature",
     "humidity",

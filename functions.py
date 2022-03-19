@@ -3,27 +3,33 @@ import pandas as pd
 import numpy as np
 import joblib
 
-from sklearn.metrics import mean_squared_error
+from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
 
 # Feature Engineering
 
+
 def load_split_datasets(part: str):
 
-    train = joblib.load(p.TTV_DATA_PATH + f'{part}_{p.DATA_SAVE_NAME}_train.pkl')
-    test = joblib.load(p.TTV_DATA_PATH + f'{part}_{p.DATA_SAVE_NAME}_test.pkl')
-    val = joblib.load(p.TTV_DATA_PATH + f'{part}_{p.DATA_SAVE_NAME}_val.pkl')
+    train = joblib.load(
+        p.TTV_DATA_PATH + f"{part}_{p.DATA_SAVE_NAME}_train.pkl"
+    )
+    test = joblib.load(p.TTV_DATA_PATH + f"{part}_{p.DATA_SAVE_NAME}_test.pkl")
+    val = joblib.load(p.TTV_DATA_PATH + f"{part}_{p.DATA_SAVE_NAME}_val.pkl")
 
     return train, test, val
 
+
 def save_split_datasets(datasets, part: str):
 
-    train = datasets['train']
-    test = datasets['test']
-    val = datasets['val']
+    train = datasets["train"]
+    test = datasets["test"]
+    val = datasets["val"]
 
-    joblib.dump(train, p.TTV_DATA_PATH + f'{part}_{p.DATA_SAVE_NAME}_train.pkl')
-    joblib.dump(test, p.TTV_DATA_PATH + f'{part}_{p.DATA_SAVE_NAME}_test.pkl')
-    joblib.dump(val, p.TTV_DATA_PATH + f'{part}_{p.DATA_SAVE_NAME}_val.pkl')
+    joblib.dump(
+        train, p.TTV_DATA_PATH + f"{part}_{p.DATA_SAVE_NAME}_train.pkl"
+    )
+    joblib.dump(test, p.TTV_DATA_PATH + f"{part}_{p.DATA_SAVE_NAME}_test.pkl")
+    joblib.dump(val, p.TTV_DATA_PATH + f"{part}_{p.DATA_SAVE_NAME}_val.pkl")
 
 
 # Modelling
@@ -36,11 +42,20 @@ def split_data_X_y(data: pd.DataFrame):
     return X, y
 
 
-def evaluate_model(model, X_test: pd.DataFrame, y_test: np.array):
+def evaluate_model(model, X: pd.DataFrame, y: np.array):
 
-    y_pred = model.predict(X_test)
+    y_pred = model.predict(X)
 
-    print(f"RMSE: {(mean_squared_error(y_true=y_test, y_pred=y_pred))**0.5}")
+    args = {"y_true": y, "y_pred": y_pred}
+
+    metrics = {
+        "rmse": [(mean_squared_error(**args)) ** 0.5],
+        "mae": [mean_absolute_error(**args)],
+        "r2": [r2_score(**args)],
+    }
+
+    for k, v in metrics.items():
+        print(f"{k} : {v[0]}")
 
 
 def save_model(model, model_name: str):

@@ -21,7 +21,6 @@ CORE_MODEL_FEATURES = [
     "rainfall",
     "snowfall",
     "date_weekday",
-    "date_month",
     "seasons_Autumn",
     "seasons_Spring",
     "seasons_Summer",

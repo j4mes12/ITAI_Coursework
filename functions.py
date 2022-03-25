@@ -42,20 +42,19 @@ def split_data_X_y(data: pd.DataFrame):
     return X, y
 
 
-def evaluate_model(model, X: pd.DataFrame, y: np.array):
+def evaluate_model(model, X: pd.DataFrame, y: np.array, metric: str):
 
     y_pred = model.predict(X)
 
     args = {"y_true": y, "y_pred": y_pred}
 
     metrics = {
-        "rmse": [(mean_squared_error(**args)) ** 0.5],
+        "rmse": (mean_squared_error(**args)) ** 0.5,
         "mae": [mean_absolute_error(**args)],
         "r2": [r2_score(**args)],
     }
 
-    for k, v in metrics.items():
-        print(f"{k} : {v[0]}")
+    return metrics[metric]
 
 
 def save_model(model, model_name: str):

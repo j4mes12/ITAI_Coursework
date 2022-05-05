@@ -2,6 +2,7 @@ import params as p
 import pandas as pd
 import numpy as np
 import joblib
+import os
 
 from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
 
@@ -132,3 +133,17 @@ def save_model_and_preds(model, model_name: str, X: pd.DataFrame):
     save_model(model, model_name)
 
     save_preds(model, model_name, X)
+
+
+def load_models():
+
+    models = {}
+
+    for file in os.listdir(p.OUTPUTS_PATH):
+
+        file_split = file.split("_")
+
+        if file_split[-1] == "model.pkl":
+            models[file_split[0]] = joblib.load(p.OUTPUTS_PATH + file)
+
+    return models['baseline'], models['xgb'], models['rf']

@@ -136,6 +136,12 @@ def save_model_and_preds(model, model_name: str, X: pd.DataFrame):
 
 
 def load_models():
+    """Loads all the .pkl files that that have the model suffix in
+    the outputs folder
+
+    Returns:
+        output_models (tuple): tuple of loaded models
+    """
 
     models = {}
 
@@ -146,4 +152,6 @@ def load_models():
         if file_split[-1] == "model.pkl":
             models[file_split[0]] = joblib.load(p.OUTPUTS_PATH + file)
 
-    return models['baseline'], models['xgb'], models['rf']
+    output_models = (models["baseline"], models["xgb"], models["rf"])
+
+    return output_models

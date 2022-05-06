@@ -1,8 +1,14 @@
 import params as p
 import pandas as pd
 import numpy as np
-import joblib
 import os
+import joblib
+from optuna import Study
+from optuna.visualization import (
+    plot_optimization_history,
+    plot_param_importances,
+    plot_slice,
+)
 
 from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
 
@@ -133,6 +139,26 @@ def save_model_and_preds(model, model_name: str, X: pd.DataFrame):
     save_model(model, model_name)
 
     save_preds(model, model_name, X)
+
+
+def make_optuna_visualizations(study: Study):
+    """Displays the selected optuna plots for the study that has been run
+
+    Args:
+        study (Study): Optuna Study
+    """
+
+    # Get optimisation plot
+    fig = plot_optimization_history(study)
+    fig.show()
+
+    # Get param importances plot
+    fig = plot_param_importances(study)
+    fig.show()
+
+    # Get hyperparameter slice plot
+    fig = plot_slice(study)
+    fig.show()
 
 
 def load_models():
